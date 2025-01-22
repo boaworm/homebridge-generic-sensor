@@ -19,7 +19,7 @@ module.exports = function (homebridge) {
 
     api = homebridge;
 
-    homebridge.registerAccessory("homebridge-generic-sensor", "HTTP-GENERIC_SENSOR", HTTP_TEMPERATURE);
+    homebridge.registerAccessory("homebridge-generic-sensor", "HTTP_GENERIC_SENSOR", HTTP_GENERIC_SENSOR);
 };
 
 const SensorUnit = Object.freeze({
