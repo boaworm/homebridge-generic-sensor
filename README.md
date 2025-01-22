@@ -57,7 +57,7 @@ The configuration can contain the following properties:
 
 ##### Basic configuration options:
 
-* `accessory` \<string\> **required**: Defines the plugin used and must be set to **"HTTP-GENERIC-SENSOR"** for this plugin.
+* `accessory` \<string\> **required**: Defines the plugin used and must be set to **"HTTP_GENERIC_SENSOR"** for this plugin.
 * `name` \<string\> **required**: Defines the name which is later displayed in HomeKit
 * `getUrl` \<string |  [urlObject](#urlobject)\> **required**: Defines the url (and other properties when using 
     and urlObject) to query the current status (in numerics) from the sensor. By default it expects the http server 
@@ -95,7 +95,7 @@ Both configs can be used for a basic plugin configuration.
 {
     "accessories": [
         {
-          "accessory": "HTTP-GENERIC-SENSOR",
+          "accessory": "HTTP_GENERIC_SENSOR",
           "name": "My Sensor",
           
           "getUrl": "http://localhost/api/getStatus"
@@ -107,7 +107,7 @@ Both configs can be used for a basic plugin configuration.
 {
     "accessories": [
         {
-          "accessory": "HTTP-GENERIC-SENSOR",
+          "accessory": "HTTP_GENERIC_SENSOR",
           "name": "My Sensor",
           
           "getUrl": {
@@ -241,7 +241,7 @@ Down here is an example on how to configure `homebridge-generic-sensor` to work 
 {
     "accessories": [
         {
-          "accessory": "HTTP-GENERIC-SENSOR",
+          "accessory": "HTTP_GENERIC_SENSOR",
           "name": "My Sensor",
           
           "notificationID": "my-sensor",
