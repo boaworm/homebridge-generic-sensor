@@ -19,7 +19,7 @@ module.exports = function (homebridge) {
 
     api = homebridge;
 
-    homebridge.registerAccessory("homebridge-generic-sensor", "HTTP_GENERIC_SENSOR", HTTP_GENERIC_SENSOR);
+    homebridge.registerAccessory("homebridge-generic-sensor", "HTTP-GENERIC-SENSOR", HTTP_GENERIC_SENSOR);
 };
 
 const SensorUnit = Object.freeze({
@@ -70,10 +70,10 @@ function HTTP_GENERIC_SENSOR(log, config) {
             this.log.warn("Property 'patternGroupToExtract' must be a number! Using default value!");
     }
 
-    this.homebridgeService = new Service.GenericSensor(this.name);
-    this.homebridgeService.getCharacteristic(Characteristic.CurrentStatus)
+    this.homebridgeService = new Service.Battery(this.name);
+    this.homebridgeService.getCharacteristic(Characteristic.BatteryLevel)
         .setProps({
-                    minValue: -100,
+                    minValue: 0,
                     maxValue: 100
                 })
         .on("get", this.getSensorReading.bind(this));
@@ -81,7 +81,7 @@ function HTTP_GENERIC_SENSOR(log, config) {
     /** @namespace config.pullInterval */
     if (config.pullInterval) {
         this.pullTimer = new PullTimer(log, config.pullInterval, this.getSensorReading.bind(this), value => {
-            this.homebridgeService.setCharacteristic(Characteristic.CurrentStatus, value);
+            this.homebridgeService.setCharacteristic(Characteristic.BatteryLevel, value);
         });
         this.pullTimer.start();
     }
@@ -153,7 +153,7 @@ HTTP_GENERIC_SENSOR.prototype = {
 
     getSensorReading: function (callback) {
         if (!this.statusCache.shouldQuery()) {
-            const value = this.homebridgeService.getCharacteristic(Characteristic.CurrentStatus).value;
+            const value = this.homebridgeService.getCharacteristic(Characteristic.BatteryLevel).value;
             if (this.debug)
                 this.log(`getSensorReading() returning cached value ${value}${this.statusCache.isInfinite()? " (infinite cache)": ""}`);
 
